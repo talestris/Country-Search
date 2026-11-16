@@ -1,10 +1,16 @@
+export type DebouncedFunction<T extends (...args: Parameters<T>) => void> = ((
+  ...args: Parameters<T>
+) => void) & {
+  cancel: () => void;
+};
+
 export function debounce<T extends (...args: Parameters<T>) => void>(
   fn: T,
   delay: number
-): (...args: Parameters<T>) => void {
+): DebouncedFunction<T> {
   let timerId: ReturnType<typeof setTimeout> | undefined;
 
-  return (...args: Parameters<T>): void => {
+  const debounced = (...args: Parameters<T>): void => {
     if (timerId !== undefined) {
       clearTimeout(timerId);
     }
@@ -13,4 +19,13 @@ export function debounce<T extends (...args: Parameters<T>) => void>(
       fn(...args);
     }, delay);
   };
+
+  debounced.cancel = (): void => {
+    if (timerId !== undefined) {
+      clearTimeout(timerId);
+      timerId = undefined;
+    }
+  };
+
+  return debounced;
 }
