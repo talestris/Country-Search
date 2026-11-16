@@ -1,0 +1,272 @@
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family:
+    system-ui,
+    -apple-system,
+    BlinkMacSystemFont,
+    "Segoe UI",
+    Roboto,
+    sans-serif;
+  background-color: #f4f6f9;
+  color: #1e293b;
+  line-height: 1.5;
+  min-height: 100vh;
+}
+
+.app {
+  max-width: 70rem;
+  margin: 0 auto;
+  padding: 2.5rem 1.25rem;
+}
+
+.app-header {
+  text-align: center;
+  margin-bottom: 2.5rem;
+}
+
+.app-title {
+  font-size: 2rem;
+  font-weight: 700;
+  color: #0f172a;
+  margin-bottom: 0.5rem;
+}
+
+.app-subtitle {
+  color: #64748b;
+  margin-bottom: 1.5rem;
+}
+
+.search-box {
+  max-width: 32.5rem;
+  margin: 0 auto;
+}
+
+.search-input {
+  width: 100%;
+  padding: 0.85rem 1.1rem;
+  font-size: 1rem;
+  border: 2px solid #cbd5e1;
+  border-radius: 0.625rem;
+  background-color: #ffffff;
+  color: #0f172a;
+  transition:
+    border-color 0.2s,
+    box-shadow 0.2s;
+}
+
+.search-input:focus {
+  outline: none;
+  border-color: #2563eb;
+  box-shadow: 0 0 0 0.1875rem rgba(37, 99, 235, 0.15);
+}
+
+/* Состояния: idle, loading, empty, error */
+.state-message {
+  text-align: center;
+  color: #64748b;
+  font-size: 1.05rem;
+}
+
+.state-idle {
+  padding: 3rem 1rem;
+}
+
+.state-loading {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+  padding: 3rem 1rem;
+}
+
+.spinner {
+  width: 2.5rem;
+  height: 2.5rem;
+  border: 0.25rem solid #e2e8f0;
+  border-top-color: #2563eb;
+  border-radius: 50%;
+  animation: spin 0.8s linear infinite;
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.state-empty {
+  max-width: 30rem;
+  margin: 2rem auto;
+  padding: 2rem;
+  text-align: center;
+  background-color: #ffffff;
+  border: 1px solid #e2e8f0;
+  border-radius: 0.75rem;
+}
+
+.empty-title {
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: #334155;
+  margin-bottom: 0.4rem;
+}
+
+.empty-hint {
+  color: #64748b;
+  font-size: 0.95rem;
+}
+
+.state-error {
+  max-width: 30rem;
+  margin: 2rem auto;
+  padding: 1.75rem;
+  text-align: center;
+  background-color: #fef2f2;
+  border: 1px solid #fecaca;
+  border-radius: 0.75rem;
+}
+
+.error-message {
+  color: #b91c1c;
+  font-weight: 500;
+  margin-bottom: 1rem;
+}
+
+.retry-button {
+  padding: 0.6rem 1.4rem;
+  font-size: 0.95rem;
+  font-weight: 600;
+  color: #ffffff;
+  background-color: #dc2626;
+  border: none;
+  border-radius: 0.5rem;
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+
+.retry-button:hover {
+  background-color: #b91c1c;
+}
+
+/* Сетка карточек */
+.countries-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(15.625rem, 1fr));
+  gap: 1.5rem;
+}
+
+.country-card {
+  background-color: #ffffff;
+  border-radius: 0.75rem;
+  overflow: hidden;
+  box-shadow: 0 0.125rem 0.5rem rgba(15, 23, 42, 0.06);
+  cursor: pointer;
+  transition:
+    transform 0.2s,
+    box-shadow 0.2s;
+  display: flex;
+  flex-direction: column;
+}
+
+.country-card:hover,
+.country-card:focus-visible {
+  transform: translateY(-0.25rem);
+  box-shadow: 0 0.625rem 1.25rem rgba(15, 23, 42, 0.12);
+  outline: 2px solid #2563eb;
+}
+
+.country-flag {
+  width: 100%;
+  height: 9.75rem;
+  object-fit: cover;
+  border-bottom: 1px solid #f1f5f9;
+}
+
+.card-body {
+  padding: 1.15rem;
+}
+
+.card-title {
+  font-size: 1.15rem;
+  font-weight: 700;
+  margin-bottom: 0.65rem;
+  color: #0f172a;
+}
+
+.detail-line {
+  font-size: 0.92rem;
+  margin-bottom: 0.3rem;
+  color: #334155;
+}
+
+.detail-label {
+  font-weight: 600;
+  color: #0f172a;
+}
+
+/* Нативный <dialog> */
+.modal-dialog {
+  margin: auto;
+  border: none;
+  border-radius: 0.875rem;
+  padding: 0;
+  max-width: 32.5rem;
+  width: calc(100% - 2rem);
+  background-color: #ffffff;
+  color: #1e293b;
+  box-shadow: 0 1.25rem 2.2rem rgba(15, 23, 42, 0.25);
+}
+
+.modal-dialog::backdrop {
+  background-color: rgba(15, 23, 42, 0.55);
+  backdrop-filter: blur(0.125rem);
+}
+
+.modal-content {
+  position: relative;
+  padding: 1.75rem;
+}
+
+.modal-close {
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+  width: 2.125rem;
+  height: 2.125rem;
+  border: none;
+  border-radius: 50%;
+  background-color: #f1f5f9;
+  color: #334155;
+  font-size: 1rem;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.modal-close:hover {
+  background-color: #e2e8f0;
+}
+
+.modal-flag {
+  width: 100%;
+  max-height: 13.125rem;
+  object-fit: cover;
+  border-radius: 0.5rem;
+  border: 1px solid #e2e8f0;
+  margin-bottom: 1.15rem;
+}
+
+.modal-title {
+  font-size: 1.5rem;
+  font-weight: 700;
+  margin-bottom: 0.85rem;
+  color: #0f172a;
+}
