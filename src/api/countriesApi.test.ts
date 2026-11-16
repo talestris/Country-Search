@@ -47,6 +47,18 @@ describe("searchCountries", () => {
   it("returns an empty array when response status is 404", async () => {
     fetchMock.mockResolvedValue({
       ok: false,
+      status: 404,
+      statusText: "Not Found",
+    });
+
+    const result = await searchCountries("NonExistentCountry");
+
+    expect(result).toEqual([]);
+  });
+
+  it("throws HttpError with status when response is not ok and not 404", async () => {
+    fetchMock.mockResolvedValue({
+      ok: false,
       status: 500,
       statusText: "Internal Server Error",
     });
