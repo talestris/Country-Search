@@ -46,4 +46,17 @@ describe("debounce", () => {
     expect(fn).toHaveBeenCalledTimes(1);
     expect(fn).toHaveBeenCalledWith("sp");
   });
+
+  it("cancels scheduled execution when cancel() is called", () => {
+    const fn = vi.fn();
+    const debounced = debounce(fn, 300);
+
+    debounced("spain");
+    vi.advanceTimersByTime(150);
+
+    debounced.cancel();
+    vi.advanceTimersByTime(300);
+
+    expect(fn).not.toHaveBeenCalled();
+  });
 });
